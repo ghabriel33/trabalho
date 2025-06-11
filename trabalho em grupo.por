@@ -1,13 +1,12 @@
 programa
 {
     // Constantes para definir os limites da agenda
-    const inteiro MAX_CONTATOS = 100
+    const inteiro MAX_CONTATOS = 10 ,MAX_USUARIOS = 3
     
     // Estruturas para armazenar os contatos
     cadeia nomes[MAX_CONTATOS]
     cadeia telefones[MAX_CONTATOS]
     inteiro totalContatos = 0
-    const inteiro MAX_USUARIOS = 3
 
 	cadeia usuarios[MAX_USUARIOS]
 	cadeia senhas[MAX_USUARIOS]
@@ -22,12 +21,24 @@ programa
             escreva("Agenda cheia! Não é possível adicionar mais contatos.\n")
         } senao {
             cadeia nome, telefone
+            logico contatoExiste = falso
             
+            faca {
             escreva("Digite o nome do contato: ")
             leia(nome)
             escreva("Digite o telefone do contato: ")
             leia(telefone)
-            
+
+            para (inteiro i = 0; i < totalContatos; i++) {
+              se (nomes[i] == nome) {
+                  contatoExiste = verdadeiro
+              }
+            }
+            se(contatoExiste){
+              escreva("Nome já cadastrado na agenda, use um nome diferente", "\n")
+            }
+            } enquanto(contatoExiste)
+                        
             nomes[totalContatos] = nome
             telefones[totalContatos] = telefone
             totalContatos = totalContatos + 1
